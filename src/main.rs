@@ -37,14 +37,18 @@ fn register(form: Form<RegisterForm>) -> &'static str {
     }
 }
 
-// Uncomment and fix the get_user route if needed
-// #[get("/users/<id>")]
-// fn get_user(id: u32) -> String {
-//     db::get_user(id).unwrap_or_else(|e| format!("Error fetching user: {}", e))
-// }
+#[get("/users/<id>")]
+fn get_user(id: u64) -> String {
+   let id = db::get_user(id);
+    if id {
+    "User was found".to_string()
+    } else {
+        "User not found".to_string()
+     }
+}
 
 #[launch]
 fn rocket() -> Rocket<Build> {
     rocket::build()
-        .mount("/", routes![index, hello, get_time, register])
+        .mount("/", routes![index, hello, get_time, register, get_user])
 }

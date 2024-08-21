@@ -7,3 +7,8 @@ pub fn register_user(name: &str, email: &str) -> bool{
         false
     }
 }
+
+pub fn get_user(id: u64) -> bool {
+    println!("Retrieved user with ID {}", id);
+    true
+}
